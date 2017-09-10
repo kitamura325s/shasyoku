@@ -1,0 +1,17 @@
+<%= form_for(@picture) do |f| %>
+  <% if @picture.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @picture.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.text_area :content, class: 'form-control input-lg', size: "1x5" %>
+  <br>
+  <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
+<% end %>
+
+<%= link_to "×", pictures_path , class: 'close' %>
