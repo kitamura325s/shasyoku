@@ -9,6 +9,12 @@
     </div>
   <% end %>
 
+  <div class="field">
+    <%= picture_img(@picture) if picture_img(@picture) %>
+    <%= f.file_field :image %>
+    <%= f.hidden_field :image_cache %>
+  </div>
+
   <%= f.text_area :content, class: 'form-control input-lg', size: "1x5" %>
   <br>
   <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
