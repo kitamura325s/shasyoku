@@ -11,14 +11,16 @@ class PicturesController < ApplicationController
       @picture = Picture.new(pictures_params)
     else
       @picture = Picture.new
+      @picture.cafeteria_id = params[:cafeteria_id]
     end
   end
 
   def create
     @picture = Picture.new(pictures_params)
     @picture.user_id = current_user.id
+    
     if @picture.save
-      redirect_to pictures_path, notice: "写真を投稿しました！"
+      redirect_to pictures_path, notice: "投稿しました！"
       #NoticeMailer.sendmail_picture(@picture).deliver
     else
       render 'new'
@@ -43,7 +45,7 @@ class PicturesController < ApplicationController
   
   private
     def pictures_params
-      params.require(:picture).permit(:content, :image, :image_cache, :remove_image)
+      params.require(:picture).permit(:title, :menu, :content, :price, :cafeteria_id, :image, :image_cache, :remove_image)
     end
     
     def set_picture

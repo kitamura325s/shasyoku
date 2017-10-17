@@ -4,6 +4,10 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     omniauth_callbacks: "users/omniauth_callbacks"
   }
+  resources :cafeterias, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  resources :cafeterias do
+    resources :pictures
+  end
   resources :pictures, only: [:index, :new, :create, :edit, :update, :destroy]
 
   root 'top#index'

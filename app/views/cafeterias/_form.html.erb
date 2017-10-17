@@ -1,0 +1,42 @@
+<%= form_for(@cafeteria, url:choose_new_or_edit) do |f| %>
+  <% if @cafeteria.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @cafeteria.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	  <div class="form-group">
+		  <label class="col-sm-2 control-label"><%= f.label :会社名 %></label>
+		  <div class="col-sm-10">
+		    <%= f.text_field :company_name, class: 'form-control' %>
+		  </div>
+	  </div>
+
+	  <div class="form-group">
+		  <label class="col-sm-2 control-label"><%= f.label :所在地 %></label>
+		  <div class="col-sm-10">
+			  <%= f.text_field :address, class: 'form-control' %>
+		  </div>
+	  </div>
+
+	  <div class="form-group">
+		  <label class="col-sm-2 control-label"><%= f.label :会社概要 %></label>
+		  <div class="col-sm-10">
+			  <%= f.text_area :company_profile, class: 'form-control' %>
+		  </div>
+	  </div>
+
+    <div class="form-group">
+      <label><%= f.label :食堂の一般公開 %></label>
+      <label><%= f.radio_button :public_release, true %> あり </label>
+      <label><%= f.radio_button :public_release, false %> なし </label>
+    </div>
+
+  <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
+<% end %>
+
+<%= link_to "×", cafeterias_path , class: 'close' %>

@@ -26,7 +26,8 @@
 			  
 			  
         <% if user_signed_in? %>
-          <li><%= link_to pictures_path do %><i class="fa fa-instagram fa-fw fa-2x"></i><% end %></li>
+          <li><%= link_to cafeterias_path do %><i class="fa fa-building fa-fw fa-2x"></i><% end %></li>
+          <li><%= link_to pictures_path do %><i class="fa fa-cutlery fa-fw fa-2x"></i><% end %></li>
           <li><%= link_to edit_user_registration_path do %><i class="fa fa-user-o fa-fw fa-2x"></i><% end %></li>
           <li><%= link_to destroy_user_session_path, method: :delete do %><i class="fa fa-sign-out fa-fw fa-2x"></i><% end %></li>
         <% else %>

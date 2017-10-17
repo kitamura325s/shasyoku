@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="wrapper col-md-8 col-md-offset-2 col-sm-10">
+    <p><%= notice %></p>
+    
+    <%= link_to new_cafeteria_path do %>会社情報を投稿する<i class="fa fa-building fa-fw fa-2x"></i><% end %>
+    
+    <% @cafeterias.each do |cafeteria| %>
+    <div class="row">
+      <%= link_to cafeteria_path(cafeteria) do %><%= cafeteria.company_name %><% end %>
+      <p>投稿者：<%= cafeteria.user.name %></p>
+      <p>投稿日：<%= cafeteria.created_at %></p>
+    </div>
+    <% end %>
+  </div>
+</div>

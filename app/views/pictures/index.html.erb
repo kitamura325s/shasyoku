@@ -2,13 +2,12 @@
   <div class="wrapper col-md-8 col-md-offset-2 col-sm-10">
     <p><%= notice %></p>
     
-    <%= link_to new_picture_path do %>投稿<i class="fa fa-camera fa-fw fa-2x"></i><% end %>
-    
     <% @pictures.each do |picture| %>
     <div class="row">
       <p><%= profile_img(picture.user) %> <%= picture.user.name %></p>
       <p><%= picture_img(picture) %>
       <p><%= picture.content %></p>
+      <%= link_to "会社情報", cafeteria_path(picture.cafeteria_id), class: 'btn btn-default btn-sm btn-info' %>
       <%= link_to "編集", edit_picture_path(picture.id), class: 'btn btn-default btn-sm btn-info' %>
       <%= link_to "削除", picture_path(picture.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-info' %>
     </div>

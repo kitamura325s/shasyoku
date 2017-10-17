@@ -9,13 +9,43 @@
     </div>
   <% end %>
 
+  <div class="form-group">
+	  <label class="col-sm-2 control-label"><%= f.label :タイトル %></label>
+	  <div class="col-sm-10">
+		  <%= f.text_field :title, class: 'form-control' %>
+	  </div>
+  </div>
+
+  <div class="form-group">
+	  <label class="col-sm-2 control-label"><%= f.label :メニュー %></label>
+	  <div class="col-sm-10">
+		  <%= f.text_area :menu, class: 'form-control' %>
+	  </div>
+  </div>
+
+  <div class="form-group">
+	  <label class="col-sm-2 control-label"><%= f.label :感想 %></label>
+	  <div class="col-sm-10">
+		  <%= f.text_area :content, class: 'form-control' %>
+	  </div>
+  </div>
+
+  <div class="form-group">
+	  <label class="col-sm-2 control-label"><%= f.label :値段 %></label>
+	  <div class="col-sm-10">
+		  <%= f.text_field :price, class: 'form-control' %>
+	  </div>
+  </div>
+
+  <label class="col-sm-2 control-label"><%= f.label :写真 %></label>
   <div class="field">
     <%= picture_img(@picture) if picture_img(@picture) %>
     <%= f.file_field :image %>
     <%= f.hidden_field :image_cache %>
   </div>
 
-  <%= f.text_area :content, class: 'form-control input-lg', size: "1x5" %>
+  <%= f.hidden_field :cafeteria_id %>
+
   <br>
   <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
 <% end %>
