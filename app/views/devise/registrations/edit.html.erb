@@ -50,6 +50,24 @@
     <h2>アカウント削除</h2>
     <%= button_to "削除", registration_path(resource_name), data: { confirm: "本当に削除しますか?" }, method: :delete, class: "btn btn-primary btn-block" %>
 
+    <br/><br/>
+    <h2>会社情報投稿一覧</h2>
+    <% @cafeterias.each do |cafeteria| %>
+    <div class="row">
+      <%= link_to cafeteria_path(cafeteria) do %><%= cafeteria.company_name %><% end %>
+    </div>
+    <% end %>
+
+    <br/><br/>
+    <h2>口コミ投稿一覧</h2>
+    <% @pictures.each do |picture| %>
+    <div class="row">
+      <p><%= picture.title %>(<%= picture.cafeteria.company_name %>)</p>
+      <%= link_to edit_picture_path(picture.id) do %><i  class="fa fa-pencil" %></i><% end %>
+      <%= link_to picture_path(picture.id), method: :delete, data: { confirm: '本当に削除していいですか？'} do %><i  class="fa fa-trash-o" %></i><% end %>
+    </div>
+    <% end %>
+
     <%= link_to "戻る", :back %>
   </div>
 </div>

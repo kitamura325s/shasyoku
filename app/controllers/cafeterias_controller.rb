@@ -3,8 +3,9 @@ class CafeteriasController < ApplicationController
   before_action :set_cafeteria, only: [:show, :edit, :update, :destroy]
   
   def index
-    @cafeterias = Cafeteria.all
-    #@cafeterias = Cafeteria.page(params[:page]).order("id DESC")
+    #@cafeterias = Cafeteria.all
+    @q        = Cafeteria.ransack(params[:q])
+    @cafeterias = @q.result(distinct: true).includes(:user)
   end
 
   def show

@@ -2,15 +2,60 @@
   <div class="wrapper col-md-8 col-md-offset-2 col-sm-10">
     <p><%= notice %></p>
     
+		<%# form_for の代わりに search_form_for を使うことで検索フォームを作成 %>
+		<%= search_form_for @q do |f| %>
+			<%# タイトルで検索 %>
+			<%= f.label :title_cont, "タイトル" %>
+			<%= f.search_field :title_cont %>
+			<br />
+
+			<%# 会社名で検索 %>
+			<%= f.label :cafeteria_company_name_cont, "会社名" %>
+			<%= f.search_field :cafeteria_company_name_cont %>
+			<br />
+
+			<%# 所在地で検索 %>
+			<%= f.label :cafeteria_address_cont, "所在地" %>
+			<%= f.search_field :cafeteria_address_cont %>
+			<br />
+
+			<%# 投稿者名で検索 %>
+			<%= f.label :user_name_cont, "投稿者" %>
+			<%= f.search_field :user_name_cont %>
+			<br />
+			
+			<%# 値段で検索 %>
+			<%= f.label :price_gteq, "値段" %>
+			<%= f.search_field :price_gteq %>
+			<%= f.label :price_lteq, "～" %>
+			<%= f.search_field :price_lteq %>
+			<br />
+
+			<%# 検索ボタン %>
+			<%= f.submit %>
+		<% end %>
+    
+    
     <% @pictures.each do |picture| %>
     <div class="row">
-      <p><%= profile_img(picture.user) %> <%= picture.user.name %></p>
-      <p><%= picture_img(picture) %>
-      <p><%= picture.content %></p>
+      <h1><%= picture.title %></h1>
+      <p>投稿者：<%= picture.user.name %></p>
+      <p>会社名：<%= picture.cafeteria.company_name %></p>
+      <p>所在地：<%= picture.cafeteria.address %></p>
+      <p><%= picture_img(picture) %></p>
+      <p>メニュー：<%= picture.menu %></p>
+      <p>値段：<%= picture.price %></p>
+      <p>感想：<%= picture.content %></p>
       <%= link_to "会社情報", cafeteria_path(picture.cafeteria_id), class: 'btn btn-default btn-sm btn-info' %>
       <%= link_to "編集", edit_picture_path(picture.id), class: 'btn btn-default btn-sm btn-info' %>
       <%= link_to "削除", picture_path(picture.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-info' %>
+      <%# <%= render 'likes/like', picture: picture %> 
+      <span id="like-of-<%= picture.id %>">
+  			<%= render partial: 'likes/like', locals: { picture: picture, likes: @likes } %>
+			</span>
     </div>
     <% end %>
+    
+    <%= link_to "戻る", :back %>
   </div>
 </div>

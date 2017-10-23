@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
   
   has_many :pictures
 
+  # いいね機能
+  has_many :likes, dependent: :destroy
+  has_many :like_pictures, through: :likes, source: :picture
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.find_by(provider: auth.provider, uid: auth.uid)

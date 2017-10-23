@@ -3,7 +3,28 @@
     <p><%= notice %></p>
     
     <%= link_to new_cafeteria_path do %>会社情報を投稿する<i class="fa fa-building fa-fw fa-2x"></i><% end %>
-    
+
+		<%# form_for の代わりに search_form_for を使うことで検索フォームを作成 %>
+		<%= search_form_for(@q, url:cafeterias_path) do |f| %>
+			<%# 会社名で検索 %>
+			<%= f.label :company_name_cont, "会社名" %>
+			<%= f.search_field :company_name_cont %>
+			<br />
+
+			<%# 所在地で検索 %>
+			<%= f.label :address_cont, "所在地" %>
+			<%= f.search_field :address_cont %>
+			<br />
+
+			<%# 投稿者名で検索 %>
+			<%= f.label :user_name_cont, "投稿者" %>
+			<%= f.search_field :user_name_cont %>
+			<br />
+
+			<%# 検索ボタン %>
+			<%= f.submit %>
+		<% end %>
+
     <% @cafeterias.each do |cafeteria| %>
     <div class="row">
       <%= link_to cafeteria_path(cafeteria) do %><%= cafeteria.company_name %><% end %>
@@ -11,5 +32,7 @@
       <p>投稿日：<%= cafeteria.created_at %></p>
     </div>
     <% end %>
+    
+    <%= link_to "戻る", :back %>
   </div>
 </div>

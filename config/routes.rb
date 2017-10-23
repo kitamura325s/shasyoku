@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, controllers: {
     registrations: "users/registrations",
@@ -8,13 +9,18 @@ Rails.application.routes.draw do
   resources :cafeterias do
     resources :pictures
   end
+  
   resources :pictures, only: [:index, :new, :create, :edit, :update, :destroy]
+  resources :pictures do
+    resources :likes, only: [:create, :destroy]
+  end
 
   root 'top#index'
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

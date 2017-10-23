@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171015004721) do
+ActiveRecord::Schema.define(version: 20171022130712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,13 @@ ActiveRecord::Schema.define(version: 20171015004721) do
     t.datetime "updated_at",      null: false
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.integer  "picture_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "pictures", force: :cascade do |t|
     t.string   "title"
     t.text     "menu"
@@ -36,6 +43,7 @@ ActiveRecord::Schema.define(version: 20171015004721) do
     t.datetime "updated_at",   null: false
     t.integer  "user_id"
     t.string   "image"
+    t.integer  "likes_count"
   end
 
   create_table "users", force: :cascade do |t|
@@ -68,4 +76,6 @@ ActiveRecord::Schema.define(version: 20171015004721) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
+  add_foreign_key "likes", "pictures"
+  add_foreign_key "likes", "users"
 end

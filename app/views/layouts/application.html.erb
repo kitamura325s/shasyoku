@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>kitastagram</title>
+  <title>世界の社食から</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -26,6 +26,7 @@
 			  
 			  
         <% if user_signed_in? %>
+          <%= link_to "世界の社食から", root_path, class: "navbar-brand" %>
           <li><%= link_to cafeterias_path do %><i class="fa fa-building fa-fw fa-2x"></i><% end %></li>
           <li><%= link_to pictures_path do %><i class="fa fa-cutlery fa-fw fa-2x"></i><% end %></li>
           <li><%= link_to edit_user_registration_path do %><i class="fa fa-user-o fa-fw fa-2x"></i><% end %></li>

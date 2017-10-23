@@ -3,7 +3,9 @@ class PicturesController < ApplicationController
   before_action :set_picture, only: [:edit, :update, :destroy]
   
   def index
-    @pictures = Picture.all
+    #@pictures = Picture.all
+    @q        = Picture.ransack(params[:q])
+    @pictures = @q.result(distinct: true).includes(:cafeteria, :user)
   end
 
   def new

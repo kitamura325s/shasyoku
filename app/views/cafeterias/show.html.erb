@@ -4,7 +4,7 @@
       <h1 class="left"><%= @cafeteria.company_name %></h1>
       
       <%= link_to new_cafeteria_picture_path(cafeteria_id: @cafeteria.id) do %>この会社の食堂について投稿する<i class="fa fa-cutlery fa-fw fa-2x"></i><% end %>
-      <%= link_to pictures_path do %>この会社の食堂の口コミを閲覧する<i class="fa fa-cutlery fa-fw fa-2x"></i><% end %>
+      <%= link_to pictures_path(cafeteria_company_name_cont: @cafeteria.company_name) do %>この会社の食堂の口コミを閲覧する<i class="fa fa-cutlery fa-fw fa-2x"></i><% end %>
     
       <p class="left">所在地：<%= @cafeteria.address %></p>
       <p class="left">会社概要：<%= @cafeteria.company_profile %></p>
