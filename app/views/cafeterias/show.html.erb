@@ -6,9 +6,12 @@
       <%= link_to new_cafeteria_picture_path(cafeteria_id: @cafeteria.id) do %>この会社の食堂について投稿する<i class="fa fa-cutlery fa-fw fa-2x"></i><% end %>
       <%= link_to pictures_path(cafeteria_company_name_cont: @cafeteria.company_name) do %>この会社の食堂の口コミを閲覧する<i class="fa fa-cutlery fa-fw fa-2x"></i><% end %>
     
-      <p class="left">所在地：<%= @cafeteria.address %></p>
       <p class="left">会社概要：<%= @cafeteria.company_profile %></p>
-      <p class="left">食堂の一般公開：<%= @cafeteria.public_release %></p>
+      <p class="left">食堂の一般公開：<%= @cafeteria.public_release ? 'あり' : 'なし'  %></p>
+      <p class="left">所在地：<%= @cafeteria.address %></p>
+      <div style='width: 100%;'>
+        <div id="map" style='width: 100%; height: 33vh;'></div>
+      </div>
       <p class="right"><%= @cafeteria.created_at %></p>
       <% if current_user.id == @cafeteria.user_id %>
       <p class="right">
@@ -21,3 +24,23 @@
     <%= link_to '戻る', cafeterias_path %>
   </div>
 </div>
+
+<script type="text/javascript">
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers([
+      {
+        "lat": <%= @cafeteria.latitude %>,
+        "lng": <%= @cafeteria.longitude %>,
+        "picture": {
+          "width":  32,
+          "height": 32
+        },
+        "infowindow": '<%= @cafeteria.company_name %>'
+      }
+    ]);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    handler.getMap().setZoom(15);
+  });
+</script>

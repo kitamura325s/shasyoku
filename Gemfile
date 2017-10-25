@@ -65,3 +65,5 @@ gem 'omniauth-facebook'
 gem 'carrierwave'
 gem 'mini_magick'
 gem "ransack"
+gem 'gmaps4rails'  # railsでGoogle mapを使えるようにする
+gem 'geocoder'     # 地名から緯度経度を引けるようにする
