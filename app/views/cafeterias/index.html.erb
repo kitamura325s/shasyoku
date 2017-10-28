@@ -1,38 +1,60 @@
+<% flash.each do |key, value| %>
+  <% key = "info" if key == "notice" %>
+  <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+<% end %>
+
 <div class="container">
-  <div class="wrapper col-md-8 col-md-offset-2 col-sm-10">
-    <p><%= notice %></p>
-    
-    <%= link_to new_cafeteria_path do %>会社情報を投稿する<i class="fa fa-building fa-fw fa-2x"></i><% end %>
+  <div class="wrapper col-md-8 col-md-offset-2 col-sm-10 ">
 
-		<%# form_for の代わりに search_form_for を使うことで検索フォームを作成 %>
-		<%= search_form_for(@q, url:cafeterias_path) do |f| %>
-			<%# 会社名で検索 %>
-			<%= f.label :company_name_cont, "会社名" %>
-			<%= f.search_field :company_name_cont %>
-			<br />
-
-			<%# 所在地で検索 %>
-			<%= f.label :address_cont, "所在地" %>
-			<%= f.search_field :address_cont %>
-			<br />
-
-			<%# 投稿者名で検索 %>
-			<%= f.label :user_name_cont, "投稿者" %>
-			<%= f.search_field :user_name_cont %>
-			<br />
-
-			<%# 検索ボタン %>
-			<%= f.submit %>
+		<%= link_to new_cafeteria_path do %>
+			<div class="isometric">
+    		<span class="iconback istw"><i class="fa fa-building fa-fw fa-2x"></i></span>
+    		<span class="btnttl">会社情報を投稿</span>
+			</div>
 		<% end %>
 
+		<div class="search-form">
+		<%# form_for の代わりに search_form_for を使うことで検索フォームを作成 %>
+		<%= search_form_for(@q, url:cafeterias_path) do |f| %>
+			<div class="form-group">
+			<%# 会社名で検索 %>
+			<div class="col-xs-3">
+			<%= f.search_field :company_name_cont, class: 'form-control', placeholder: '会社名で検索' %>
+			</div
+			</div>
+
+			<div class="form-group">
+			<%# 所在地で検索 %>
+			<div class="col-xs-3">
+			<%= f.search_field :address_cont, class: 'form-control', placeholder: '所在地で検索' %>
+			</div>
+			</div>
+
+			<div class="form-group">
+			<%# 投稿者名で検索 %>
+			<div class="col-xs-3">
+			<%= f.search_field :user_name_cont, class: 'form-control', placeholder: '投稿者で検索' %>
+			</div>
+			</div>
+
+			<%# 検索ボタン %>
+			<%= f.submit class: 'btn btn-default' %>
+		<% end %>
+		</div>
+
     <% @cafeterias.each do |cafeteria| %>
-    <div class="row">
-      <%= link_to cafeteria_path(cafeteria) do %><%= cafeteria.company_name %><% end %>
-      <p>投稿者：<%= cafeteria.user.name %></p>
-      <p>投稿日：<%= cafeteria.created_at %></p>
+    <div class="row cafe-index-box">
+		<div class="row">
+			<div class="col-sm-2">会社名</div>
+			<div class="col-sm-10"><%= link_to cafeteria_path(cafeteria) do %><%= cafeteria.company_name %><% end %></div>
+			<div class="col-sm-2">投稿者</div>
+			<div class="col-sm-10"><%= cafeteria.user.name %></div>
+			<div class="col-sm-2">投稿日</div>
+			<div class="col-sm-10"><%= cafeteria.created_at %></div>
+		</div>
     </div>
     <% end %>
     
-    <%= link_to "戻る", :back %>
+    <%= link_to "back", :back %>
   </div>
 </div>

@@ -1,61 +1,97 @@
+<% flash.each do |key, value| %>
+  <% key = "info" if key == "notice" %>
+  <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+<% end %>
+
 <div class="container">
   <div class="wrapper col-md-8 col-md-offset-2 col-sm-10">
-    <p><%= notice %></p>
-    
+
+		<div class="search-form">
 		<%# form_for の代わりに search_form_for を使うことで検索フォームを作成 %>
 		<%= search_form_for @q do |f| %>
-			<%# タイトルで検索 %>
-			<%= f.label :title_cont, "タイトル" %>
-			<%= f.search_field :title_cont %>
-			<br />
+			<div class="form-group">
+			<div class="col-xs-4">
+			<%= f.search_field :title_cont, class: 'form-control', placeholder: 'タイトルで検索' %>
+			</div
+			</div>
 
-			<%# 会社名で検索 %>
-			<%= f.label :cafeteria_company_name_cont, "会社名" %>
-			<%= f.search_field :cafeteria_company_name_cont %>
-			<br />
+			<div class="form-group">
+			<div class="col-xs-4">
+			<%= f.search_field :cafeteria_company_name_cont, class: 'form-control', placeholder: '会社名で検索' %>
+			</div>
+			</div>
 
-			<%# 所在地で検索 %>
-			<%= f.label :cafeteria_address_cont, "所在地" %>
-			<%= f.search_field :cafeteria_address_cont %>
-			<br />
-
-			<%# 投稿者名で検索 %>
-			<%= f.label :user_name_cont, "投稿者" %>
-			<%= f.search_field :user_name_cont %>
-			<br />
+			<div class="form-group">
+			<div class="col-xs-4">
+			<%= f.search_field :cafeteria_address_cont, class: 'form-control', placeholder: '所在地で検索' %>
+			</div>
+			</div>
 			
-			<%# 値段で検索 %>
-			<%= f.label :price_gteq, "値段" %>
-			<%= f.search_field :price_gteq %>
-			<%= f.label :price_lteq, "～" %>
-			<%= f.search_field :price_lteq %>
-			<br />
+			<div class="form-group">
+			<div class="col-xs-4">
+			<%= f.search_field :user_name_cont, class: 'form-control', placeholder: '投稿者で検索' %>
+			</div>
+			</div>
+			
+			<div class="form-group">
+			<div class="col-xs-4">
+			<%= f.search_field :price_gteq, class: 'form-control', placeholder: '値段下限' %>
+			</div>
+			</div>
 
+			<div class="form-group">
+			<div class="col-xs-4">
+			<%= f.search_field :price_lteq, class: 'form-control', placeholder: '値段上限' %>
+			</div>
+			</div>
+
+			<br>
 			<%# 検索ボタン %>
-			<%= f.submit %>
+			<%= f.submit class: 'btn btn-default center-block' %>
 		<% end %>
+		</div>
     
-    
+ 
     <% @pictures.each do |picture| %>
-    <div class="row">
-      <h1><%= picture.title %></h1>
-      <p>投稿者：<%= picture.user.name %></p>
-      <p>会社名：<%= picture.cafeteria.company_name %></p>
-      <p>所在地：<%= picture.cafeteria.address %></p>
-      <p><%= picture_img(picture) %></p>
-      <p>メニュー：<%= picture.menu %></p>
-      <p>値段：<%= picture.price %></p>
-      <p>感想：<%= picture.content %></p>
+    <div class="row cafe-index-box">
+ 	    <h1><%= picture.title %></h1> 
+		  <p><%= picture_img(picture) %></p>
+		  <div class="row">
+			  <div class="col-sm-2">投稿者</div>
+			  <div class="col-sm-10"><%= picture.user.name %></div>
+		  </div>
+		  <div class="row">
+			  <div class="col-sm-2">会社名</div>
+			  <div class="col-sm-10"><%= picture.cafeteria.company_name %></div>
+		  </div>
+		  <div class="row">
+			  <div class="col-sm-2">所在地</div>
+			  <div class="col-sm-10"><%= picture.cafeteria.address %></div>
+		  </div>
+		  <div class="row">
+			  <div class="col-sm-2">メニュー</div>
+			  <div class="col-sm-10"><%= picture.menu %></div>
+		  </div>
+		  <div class="row">
+			  <div class="col-sm-2">値段</div>
+			  <div class="col-sm-10"><%= picture.price %> 円</div>
+		  </div>
+		  <div class="row">
+			  <div class="col-sm-2">感想</div>
+			  <div class="col-sm-10"><%= picture.content %></div>
+		  </div>
+			<br>		  
       <%= link_to "会社情報", cafeteria_path(picture.cafeteria_id), class: 'btn btn-default btn-sm btn-info' %>
       <%= link_to "編集", edit_picture_path(picture.id), class: 'btn btn-default btn-sm btn-info' %>
       <%= link_to "削除", picture_path(picture.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-info' %>
-      <%# <%= render 'likes/like', picture: picture %> 
       <span id="like-of-<%= picture.id %>">
   			<%= render partial: 'likes/like', locals: { picture: picture, likes: @likes } %>
-			</span>
+	  </span>
+	  <br>
     </div>
     <% end %>
-    
-    <%= link_to "戻る", :back %>
+ 
+   
+    <%= link_to "back", :back %>
   </div>
 </div>

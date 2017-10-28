@@ -1,3 +1,134 @@
 // Place all the styles related to the cafeterias controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.cafe-index-box{
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    color: #5d627b;
+    background: white;
+    border-top: solid 5px #5d627b;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+    text-align: left;
+}
+.cafe-index-box p {
+    margin: 0; 
+    padding: 0;
+}
+
+.isometric { 
+    color: #484848;
+    display: inline-block;
+    height: 50px;
+    font-size: 25px;
+    line-height: 46px;
+    background: #eaeef1;
+    text-decoration: none;
+    box-sizing: border-box; 
+    margin: 1em;
+}
+.isometric .iconback{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    color: white;
+    vertical-align: middle;
+}
+.isometric span{
+    vertical-align: middle;
+}
+.isometric .iconback .fa{
+    line-height: 46px;
+    font-size:25px;
+}
+.isometric .btnttl{
+    display: inline-block;
+    width: 120px;
+    height: 50px;
+    text-align: center;
+    border-bottom: solid 4px #dcdcdc;
+    vertical-align:middle;
+    font-size: 60%;
+}
+.isometric .istw{
+    background:#2c3e50;
+    border-bottom: solid 4px #1f2b38;
+}
+
+.show{
+    width: 80%;
+    min-height:80%;
+    height:auto !important;
+    height:80%;
+    background:white;
+    top: 70px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    margin: auto;
+}
+
+table.company {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 0px 15px;
+}
+ 
+table.company th,
+table.company td {
+    padding: 10px;
+}
+ 
+table.company th {
+    background: #484848;
+    vertical-align: middle;
+    text-align: left;
+    width: 130px;
+    overflow: visible;
+    position: relative;
+    color: #fff;
+    font-weight: normal;
+    font-size: 13px;
+}
+ 
+table.company th:after {
+    left: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(136, 183, 213, 0);
+    border-left-color: #484848;
+    border-width: 10px;
+    margin-top: -10px;
+}
+/* firefox */
+@-moz-document url-prefix() {
+    table.company th::after {
+        float: right;
+        padding: 0;
+        left: 30px;
+        top: 10px;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: relative;
+        pointer-events: none;
+        border: 10px solid transparent;
+        border-left: #484848 10px solid;
+        margin-top: -10px;
+    }
+}
+ 
+table.company td {
+    background: #f8f8f8;
+    width: 360px;
+    padding-left: 20px;
+    text-align: left
+}

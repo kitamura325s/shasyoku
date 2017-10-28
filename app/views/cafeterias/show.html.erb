@@ -1,29 +1,61 @@
 <p id="notice"><%= notice %></p>
+
+<div class="show">
 <div class="child row">
   <div class="wrapper col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
-      <h1 class="left"><%= @cafeteria.company_name %></h1>
-      
-      <%= link_to new_cafeteria_picture_path(cafeteria_id: @cafeteria.id) do %>この会社の食堂について投稿する<i class="fa fa-cutlery fa-fw fa-2x"></i><% end %>
-      <%= link_to pictures_path(cafeteria_company_name_cont: @cafeteria.company_name) do %>この会社の食堂の口コミを閲覧する<i class="fa fa-cutlery fa-fw fa-2x"></i><% end %>
-    
-      <p class="left">会社概要：<%= @cafeteria.company_profile %></p>
-      <p class="left">食堂の一般公開：<%= @cafeteria.public_release ? 'あり' : 'なし'  %></p>
-      <p class="left">所在地：<%= @cafeteria.address %></p>
-      <div style='width: 100%;'>
-        <div id="map" style='width: 100%; height: 33vh;'></div>
-      </div>
-      <p class="right"><%= @cafeteria.created_at %></p>
+
+  <br>
+		<%= link_to new_cafeteria_picture_path(cafeteria_id: @cafeteria.id) do %>
+			<div class="isometric">
+    		<span class="iconback istw"><i class="fa fa-cutlery fa-fw fa-2x"></i></span>
+    		<span class="btnttl">口コミを投稿</span>
+			</div>
+		<% end %>
+		<%= link_to pictures_path(cafeteria_company_name_cont: @cafeteria.company_name) do %>
+			<div class="isometric">
+    		<span class="iconback istw"><i class="fa fa-cutlery fa-fw fa-2x"></i></span>
+    		<span class="btnttl">口コミを閲覧</span>
+			</div>
+		<% end %>
+
+  <table class="company">
+      <tbody>
+          <tr>
+              <th class="arrow_box">会社名</div></th>
+              <td><%= @cafeteria.company_name %></td>
+          </tr>
+          <tr>
+              <th class="arrow_box">所在地</th>
+              <td>
+                <%= @cafeteria.address %>
+                <div style='width: 100%;'>
+                  <div id="map" style='width: 100%; height: 33vh;'></div>
+                </div>
+              </td>
+          </tr>
+          <tr>
+              <th class="arrow_box">会社概要</th>
+              <td><%= @cafeteria.company_profile %></td>
+          </tr>
+          <tr>
+              <th class="arrow_box">食堂の一般公開</th>
+              <td><%= @cafeteria.public_release ? 'あり' : 'なし'  %></td>
+          </tr>
+      </tbody>
+  </table>
+
       <% if current_user.id == @cafeteria.user_id %>
       <p class="right">
-        <%= link_to "編集", edit_cafeteria_path(@cafeteria.id), class: 'btn btn-default btn-sm btn-info' %>
-        <%= link_to "削除", cafeteria_path(@cafeteria.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-info' %>
+        <%= link_to "編集", edit_cafeteria_path(@cafeteria.id), class: 'btn btn-default btn-sm' %>
+        <%= link_to "削除", cafeteria_path(@cafeteria.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn' %>
       </p>
       <% end %>
+      <%= link_to 'back', cafeterias_path %>
     </div>
-
-    <%= link_to '戻る', cafeterias_path %>
   </div>
 </div>
+</div>
+
 
 <script type="text/javascript">
   handler = Gmaps.build('Google');
